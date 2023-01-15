@@ -26,12 +26,15 @@ export const NavContainer = styled.nav`
       display: flex;
       gap: 1rem;  
       border-radius: 5px; 
+      
 
    }
+   li { transform: rotate(6deg) }
+   
 
-   li {
+   a {
       background-color: #4B3F59;
-      transform: rotate(6deg);
+
       border-radius: 3px;
       padding: 10px 15px;
       transition: all .3s;

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import { Card } from '../shared/components/Card/Card';
 import * as C from '../styles/HomeStyled';
 
@@ -8,7 +9,7 @@ export interface resultsProps {
   url: string
 }
 
-interface dataResultProps {
+export interface dataResultProps {
   results: resultsProps[];
 }
 
@@ -16,8 +17,8 @@ export async function getStaticProps() {
   const maxPokemons = 100;
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${maxPokemons}`);
   const data: dataResultProps = await response.json();
+
   //add index pokemon
-  console.log(data);
 
   data.results.forEach((poke, index) => {
     poke.id = index + 1;

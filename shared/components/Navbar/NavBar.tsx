@@ -3,6 +3,7 @@ import Image from "next/image";
 import * as C from './styled';
 
 export const Navbar = () => {
+
    return (
       <C.NavContainer>
          <div>
