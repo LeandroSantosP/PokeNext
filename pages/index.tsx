@@ -5,7 +5,6 @@ import * as C from '../styles/HomeStyled';
 
 export interface resultsProps {
   name: string;
-  id: number;
   url: string
 }
 
@@ -13,16 +12,15 @@ export interface dataResultProps {
   results: resultsProps[];
 }
 
+interface HomeProps {
+  pokemons: resultsProps[];
+}
+
+
 export async function getStaticProps() {
   const maxPokemons = 100;
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${maxPokemons}`);
   const data: dataResultProps = await response.json();
-
-  //add index pokemon
-
-  data.results.forEach((poke, index) => {
-    poke.id = index + 1;
-  });
 
   return {
     props: {
@@ -31,9 +29,6 @@ export async function getStaticProps() {
   }
 }
 
-interface HomeProps {
-  pokemons: resultsProps[];
-}
 
 export default function Home({ pokemons }: HomeProps) {
 
@@ -41,13 +36,13 @@ export default function Home({ pokemons }: HomeProps) {
     <C.MainContainer>
       <div>
         <h1>Poke<span>Next</span></h1>
-        <Image src="/images/logo.png" alt='logo' height={40} width={40} />
+        <Image src="/images/logo.png" alt='logo' height={100} width={100} />
 
       </div>
 
       <ul>
-        {pokemons.map((poke) => (
-          <Card key={poke.id} pokeInfos={poke} />
+        {pokemons.map((poke, index) => (
+          <Card key={index} pokeInfos={poke} />
         ))}
       </ul>
     </C.MainContainer>

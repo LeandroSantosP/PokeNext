@@ -13,6 +13,4 @@ export function NormalizerData(data: pokesInfosProps) {
       pokeTypes: pokesInfos.types.type,
       pokeForms: pokesInfos.forms.map(form => form)
    }
-
-
 }
