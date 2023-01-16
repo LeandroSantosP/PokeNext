@@ -7,7 +7,7 @@ import * as C from './styled';
 interface CardProps {
    pokeInfos: resultsProps
 }
-function FormatTextToUpperCase(name: string) {
+export function FormatTextToUpperCase(name: string) {
    let fristLetter = name.charAt(0).toUpperCase();
    let restLetters = name.slice(1);
    let finalResult = fristLetter + restLetters;

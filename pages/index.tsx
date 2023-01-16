@@ -16,9 +16,8 @@ interface HomeProps {
   pokemons: resultsProps[];
 }
 
-
 export async function getStaticProps() {
-  const maxPokemons = 100;
+  const maxPokemons = 200;
   const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${maxPokemons}`);
   const data: dataResultProps = await response.json();
 
@@ -28,7 +27,6 @@ export async function getStaticProps() {
     }
   }
 }
-
 
 export default function Home({ pokemons }: HomeProps) {
 
