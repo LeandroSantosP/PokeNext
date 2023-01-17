@@ -91,7 +91,7 @@ export const typeContainer = styled.div`
             @media (max-width: 768px) {
                   flex-direction: column;
                   align-items: center;
-                  h2 {
+                  a {
                         width: 100%;
                         max-width:100%;
                         flex: 1;

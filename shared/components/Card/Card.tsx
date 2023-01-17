@@ -20,7 +20,8 @@ export function getUrlId(url: string) {
 
    if (url.includes("/")) urlWithOutBackslash = url.replaceAll("/", "");
 
-   const getID = urlWithOutBackslash.slice(-3);
+   const getID = urlWithOutBackslash.slice(-5);
+
 
    return getID.replace(/[^0-9]/g, '');
 }
@@ -29,7 +30,7 @@ export function getUrlId(url: string) {
 export const Card = ({ pokeInfos }: CardProps) => {
    const { name, url } = pokeInfos;
 
-   const pokeId = getUrlId(url)
+   const pokeId = getUrlId(url);
 
    return (
       <C.LiContainer>

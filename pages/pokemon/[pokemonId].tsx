@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { dataResultProps } from "..";
 import { FormatTextToUpperCase, getUrlId } from "../../shared/components/Card/Card";
 import { coloursByTypeProps, GetAllTyped } from "../../shared/functions/GetAllTypes";
-import { NormalizerData } from "../../shared/functions/NormalizadData";
+import { NormalizerData } from "../../shared/functions/NormalizantionData";
 import * as C from '../../styles/PokemonStyled';
 
 export const getStaticPaths = async () => {
-   const maxPokemons = 200;
+   const maxPokemons = 99999;
    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${maxPokemons}`);
    const data: dataResultProps = await response.json();
 
@@ -58,8 +58,8 @@ export default function Pokemon({ pokemon }: any) {
       }
    }, [setPokeType]);
 
-   const pokeID = (pokemons?.pokeId.toString().length);
 
+   const pokeID = (pokemons?.pokeId.toString().length);
    if (pokemons && poketype)
 
       return (
@@ -67,7 +67,8 @@ export default function Pokemon({ pokemon }: any) {
             <C.PokemonContainer>
                <C.PokeTitle>{FormatTextToUpperCase(pokemons?.pokename)}</C.PokeTitle>
                <Image
-                  src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokeID === 1 ? '00' + pokemons.pokeId : pokeID === 2 ? '0' + pokemons.pokeId : pokeID === 3 ? pokemons.pokeId : ''}.png`}
+                  src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemons.pokeId}.png`}
+                  // src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokeID === 1 ? '00' + pokemons.pokeId : pokeID === 2 ? '0' + pokemons.pokeId : pokeID === 3 ? pokemons.pokeId : ''}.png`}
                   alt={pokemons.pokename}
                   width={200}
                   height={200}
@@ -77,14 +78,17 @@ export default function Pokemon({ pokemon }: any) {
 
                   <h2 >Tipo</h2>
                   <C.typeContainer >
-                     {pokemons && pokemons?.pokeTypes.map(item => (
-                        <Link href="#" style={{
+                     {pokemons && pokemons?.pokeTypes.map((item, index) => (
+
+                        <Link key={index} href={`/pokemon/category/${getUrlId(item.type.url)}`} style={{
                            backgroundColor: `${poketype
                               .map(pokeInfo => pokeInfo.type === item.type.name && pokeInfo.color)
                               .filter(item => typeof item === 'string')[0]}`
-                        }} key={item.slot}>
+                        }}>
                            {FormatTextToUpperCase(item.type.name)}
                         </Link>
+
+
                      ))}
                   </C.typeContainer>
 
