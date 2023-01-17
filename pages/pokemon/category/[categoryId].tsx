@@ -41,16 +41,14 @@ export default function category() {
    }, [getid]);
 
    const themeColor = ThemeColorBYPekeType(data?.categoryName);
-   console.log(themeColor);
 
    return (
-      <div>
+      <div style={{ backgroundColor: `${themeColor}` }}>
          <C.Title>Categoria <span>{data?.categoryName}</span></C.Title>
          <C.CategorieContainer>
             {data && data.pokemonList.map((poke, index) => (
                <Card key={index} pokeInfos={{ name: `${poke.name}`, url: `${poke.url}` }} />
             ))}
-
          </C.CategorieContainer>
       </div>
    )

@@ -28,8 +28,12 @@ export const NavContainer = styled.nav`
       border-radius: 5px; 
       
 
+      @media(max-width: 768px){
+         display: none;
+      }
+
    }
-   li { transform: rotate(6deg) }
+   /* li { transform: rotate(6deg) } */
    
 
    a {

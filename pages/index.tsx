@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Card } from '../shared/components/Card/Card';
+import { Button } from '../shared/components/Navbar/Button';
 import { allNamesTypesProps, GetAllTyped } from '../shared/functions/GetAllTypes';
 import * as C from '../styles/HomeStyled';
 
@@ -60,12 +61,13 @@ export default function Home({ pokemons }: HomeProps) {
         <Image src="/images/logo.png" alt='logo' height={100} width={100} />
 
       </div>
-
+      {/* <Button /> */}
       <ul>
         {pokemons.map((poke, index) => (
           <Card key={index} pokeInfos={poke} />
         ))}
       </ul>
+
     </C.MainContainer>
   )
 }

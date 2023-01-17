@@ -102,7 +102,7 @@ export interface ColorsReponseProps {
 
 //Can you take all pokemons just pass '' propety in GetAllTyped function!
 
-export const GetAllTyped = async (types: string[] | ''): Promise<ColorsReponseProps | allNamesTypesProps[]> => {
+export const GetAllTyped = async (types: string[] | '') => {
    const response = await fetch(`https://pokeapi.co/api/v2/type`);
    const data = await response.json();
 
