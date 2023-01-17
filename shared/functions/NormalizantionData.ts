@@ -1,4 +1,4 @@
-import { pokesInfosProps, PokeInfos } from "../components/types/type";
+import { PokeInfos } from "../components/types/type";
 import { NormalizantionCategoriesProps } from "../components/types/typeCate";
 
 export function NormalizerData(data: PokeInfos) {

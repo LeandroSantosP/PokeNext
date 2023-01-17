@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { isNumericLiteral, TypePredicateKind } from "typescript";
 
-interface allNamesTypesProps {
+export interface allNamesTypesProps {
    name?: string;
    url?: string;
 }
@@ -11,8 +11,7 @@ export interface coloursByTypeProps {
    type: string;
 }
 
-
-const coloursByType: coloursByTypeProps[] = [
+export const coloursByType: coloursByTypeProps[] = [
    {
       type: "normal",
       color: '#A8A77A'
@@ -103,9 +102,10 @@ export interface ColorsReponseProps {
 
 //Can you take all pokemons just pass '' propety in GetAllTyped function!
 
-export const GetAllTyped = async (types: string[] | ''): Promise<ColorsReponseProps | any> => {
+export const GetAllTyped = async (types: string[] | ''): Promise<ColorsReponseProps | allNamesTypesProps[]> => {
    const response = await fetch(`https://pokeapi.co/api/v2/type`);
    const data = await response.json();
+
    const allNamesTypes = data.results.map((element: allNamesTypesProps) => element.name);
 
    if (types.length > 0 && !types !== null) {
@@ -118,5 +118,5 @@ export const GetAllTyped = async (types: string[] | ''): Promise<ColorsReponsePr
    }
 
 
-   return allNamesTypes;
+   return data.results;
 }

@@ -7,6 +7,14 @@ export const MainContainer = styled.div`
    background-repeat: no-repeat;
    background-attachment: scroll;
    background-attachment: fixed;
+   
+
+   h1 {
+      font-size: 3rem;
+      span {
+         color: #EF4035;
+      }
+   }
 
 
    div:first-child{

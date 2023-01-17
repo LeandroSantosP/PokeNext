@@ -1,18 +1,11 @@
 import { useRouter } from 'next/router';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NormalizantionCategories } from '../../../shared/functions/NormalizantionData';
+import { coloursByType } from '../../../shared/functions/GetAllTypes'
 import { getAllCategory } from '../../../shared/functions/getAllCategory';
 import { pokemonListProps } from '../../../shared/components/types/typeCate';
 import { Card } from '../../../shared/components/Card/Card';
-
-interface categoryProps {
-   params: {
-      pokeByCategory: {
-         name: string;
-         url: string;
-      }
-   }
-}
+import * as C from '../../../styles/CetegoryStyles'
 
 interface datasProps {
    categoryName: string
@@ -21,13 +14,18 @@ interface datasProps {
 }
 
 export default function category() {
-   const [data, setData] = useState<datasProps>()
+   const [data, setData] = useState<datasProps>();
+
+   const ThemeColorBYPekeType = (name: string | undefined): string => {
+      const colorfilter = coloursByType
+         .filter(item => item.type === name)
+         .map(item => item.color);
+
+      return colorfilter[0];
+   }
 
    const routes = useRouter();
    const getid: any = routes.query.categoryId;
-   console.log(getid);
-
-   console.log(getid);
 
    useEffect(() => {
       console.log(getid);
@@ -42,15 +40,18 @@ export default function category() {
       }
    }, [getid]);
 
+   const themeColor = ThemeColorBYPekeType(data?.categoryName);
+   console.log(themeColor);
 
    return (
       <div>
-         <ul>
-
+         <C.Title>Categoria <span>{data?.categoryName}</span></C.Title>
+         <C.CategorieContainer>
             {data && data.pokemonList.map((poke, index) => (
                <Card key={index} pokeInfos={{ name: `${poke.name}`, url: `${poke.url}` }} />
             ))}
-         </ul>
+
+         </C.CategorieContainer>
       </div>
    )
 }

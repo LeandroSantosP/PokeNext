@@ -5,7 +5,6 @@ export const getAllCategory = async (id: string): Promise<NormalizantionCategori
 
    const response = await fetch(`https://pokeapi.co/api/v2/type/${id}/`);
    const data = await response.json();
-   console.log(data);
 
    return data;
 }

@@ -50,18 +50,18 @@ export default function Pokemon({ pokemon }: any) {
       if (typesNames) {
          const getColors = async () => {
             const response = await GetAllTyped(typesNames);
-            if (response)
+            if (response) {
                setPokeType(response.colors);
+            }
          }
 
          getColors();
       }
    }, [setPokeType]);
 
-
    const pokeID = (pokemons?.pokeId.toString().length);
-   if (pokemons && poketype)
 
+   if (pokemons)
       return (
          <>
             <C.PokemonContainer>
