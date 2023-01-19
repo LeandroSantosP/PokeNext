@@ -1,4 +1,3 @@
-import * as Popover from "@radix-ui/react-popover";
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { MobileMenu } from './MobileMenus';
@@ -11,7 +10,7 @@ const StyledBurger = styled.div<ButtonProps>`
    width: 2rem;
    height: 2rem;
    position: fixed;
-   top: 15px;
+   top: 40px;
    right: 20px;
    display: flex;
    justify-content: space-around;

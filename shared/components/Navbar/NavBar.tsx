@@ -27,9 +27,6 @@ export const Navbar = () => {
                </li>
             </ul>
          </C.NavContainer>
-         <Button />
-
-
       </>
    )
 }

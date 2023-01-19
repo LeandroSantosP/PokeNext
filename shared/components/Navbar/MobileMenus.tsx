@@ -8,20 +8,19 @@ import { Button } from "./Button"
 const MobileMenuStyles = styled.ul`
          flex-direction: column;
          position: fixed;
-         background-color: red;
-         background-color: #fff;
          top: 0;
          left: 0;
          height: 100%;
          width: 300px;
          padding-top: 3.5rem;
-         border-right: 2px solid #111;
+         background-color: #2f2d2d;
 
          li {
             display: flex;
             justify-content: center;
             background-color: #111;
             color: #fff;
+            
             margin-bottom: 1rem;
             padding: 1rem;
             font-size: 2rem;
@@ -55,12 +54,6 @@ export const MobileMenu = ({ open }: MobileMenu) => {
                   Sobre
                </Link >
             </li>
-            <li>
-               <Link href="/about">
-                  item 3
-               </Link>
-            </li>
-
          </MobileMenuStyles>
       </>
    )
