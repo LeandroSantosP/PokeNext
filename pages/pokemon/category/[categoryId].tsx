@@ -46,7 +46,7 @@ interface categoryProps {
    id: string;
 }
 
-export default function category({ id }: categoryProps) {
+export default function Category({ id }: categoryProps) {
    const [data, setData] = useState<datasProps>();
 
    const ThemeColorBYPekeType = (name: string | undefined): string => {

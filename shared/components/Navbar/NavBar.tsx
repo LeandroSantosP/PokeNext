@@ -25,11 +25,6 @@ export const Navbar = () => {
                      Sobre
                   </Link>
                </li>
-               <li>
-                  <Link href="/about">
-                     item 3
-                  </Link>
-               </li>
             </ul>
          </C.NavContainer>
          <Button />
