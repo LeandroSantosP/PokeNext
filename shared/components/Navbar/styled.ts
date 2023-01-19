@@ -9,7 +9,8 @@ export const NavContainer = styled.nav`
    padding: 20px;
 
 
-   & div {
+
+   & div:first-child {
       display: flex;
       align-items: center;
       gap: 2rem;

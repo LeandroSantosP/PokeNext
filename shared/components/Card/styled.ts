@@ -13,23 +13,40 @@ export const LiContainer = styled.li`
 
       img{
             margin: 0 auto;
+            width: 80%;
+            height: 80%;
       }
 
-      h1{
-            font-size: 2rem;
-      }
       & a{
        background-color: #333;
        color: #fff;
        padding: 1rem;
        border-radius: 6px;
        margin: 0 5px;
-       margin-top: 1rem;
+       margin-bottom: 1rem;
        transition: all .3s;
       }
 
       & a:hover {
             background-color: #111;
+      }
+
+      @media (max-width: 768px) {
+            width: 150px;
+            height: 200px;
+            gap: 0;
+
+
+            h2 {
+                  font-size: 1rem;
+            }
+
+            a {
+                  margin-top: 1rem;
+                  padding: 9px;
+                  font-size: 12px;
+            }
+            
       }
 `
 

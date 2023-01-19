@@ -1,11 +1,12 @@
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { NormalizantionCategories } from '../../../shared/functions/NormalizantionData';
 import { coloursByType } from '../../../shared/functions/GetAllTypes'
 import { getAllCategory } from '../../../shared/functions/getAllCategory';
 import { pokemonListProps } from '../../../shared/components/types/typeCate';
-import { Card } from '../../../shared/components/Card/Card';
-import * as C from '../../../styles/CetegoryStyles'
+import { Card, getUrlId } from '../../../shared/components/Card/Card';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import * as C from '../../../styles/CetegoryStyles';
+import Head from 'next/head';
 
 interface datasProps {
    categoryName: string
@@ -13,7 +14,39 @@ interface datasProps {
    pokemonList: pokemonListProps[]
 }
 
-export default function category() {
+export const getStaticPaths: GetStaticPaths = async () => {
+
+   const response = await fetch(`https://pokeapi.co/api/v2/type/`)
+   const json = await response.json();
+
+   const paths = json.results.map((item: any) => ({
+      params: { categoryId: getUrlId(item.url).toString() }
+   }))
+
+   return {
+      paths,
+      fallback: false
+   }
+
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+
+   const id = params?.categoryId
+
+   return {
+      props: {
+         id,
+         exemple: `lsdankldajklsadjkld`,
+      }
+   }
+}
+
+interface categoryProps {
+   id: string;
+}
+
+export default function category({ id }: categoryProps) {
    const [data, setData] = useState<datasProps>();
 
    const ThemeColorBYPekeType = (name: string | undefined): string => {
@@ -24,13 +57,9 @@ export default function category() {
       return colorfilter[0];
    }
 
-   const routes = useRouter();
-   const getid: any = routes.query.categoryId;
-
    useEffect(() => {
-      console.log(getid);
-      if (getid) {
-         getAllCategory(getid)
+      if (id) {
+         getAllCategory(id)
             .then(res => {
                setData(NormalizantionCategories(res));
             })
@@ -38,18 +67,23 @@ export default function category() {
                console.error(err);
             });
       }
-   }, [getid]);
+   }, [id]);
 
    const themeColor = ThemeColorBYPekeType(data?.categoryName);
 
    return (
-      <div style={{ backgroundColor: `${themeColor}` }}>
-         <C.Title>Categoria <span>{data?.categoryName}</span></C.Title>
+      <>
+         <Head>
+            <title>PokeDex</title>
+            <meta name="description" content="Pagina de Lista de pokemoons pelo tipo" />
+            <link rel="icon" type="image/x-icon" href="/images/logo.png" />
+         </Head>
+         <C.Title color={themeColor}>Categoria <span>{data?.categoryName}</span></C.Title>
          <C.CategorieContainer>
             {data && data.pokemonList.map((poke, index) => (
                <Card key={index} pokeInfos={{ name: `${poke.name}`, url: `${poke.url}` }} />
             ))}
          </C.CategorieContainer>
-      </div>
+      </>
    )
 }

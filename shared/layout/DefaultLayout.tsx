@@ -10,7 +10,9 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => {
 
    return (
       <>
-         <Navbar />
+         <div>
+            <Navbar />
+         </div>
          <C.maincontianer>{children}</C.maincontianer>
          <Footer />
       </>

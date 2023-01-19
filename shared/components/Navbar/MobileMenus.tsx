@@ -8,6 +8,7 @@ import { Button } from "./Button"
 const MobileMenuStyles = styled.ul`
          flex-direction: column;
          position: fixed;
+         background-color: red;
          background-color: #fff;
          top: 0;
          left: 0;

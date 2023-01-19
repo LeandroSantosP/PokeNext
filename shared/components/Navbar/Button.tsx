@@ -1,3 +1,4 @@
+import * as Popover from "@radix-ui/react-popover";
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { MobileMenu } from './MobileMenus';
@@ -48,7 +49,7 @@ const StyledBurger = styled.div<ButtonProps>`
 export const Button = () => {
    const [open, setOpen] = useState(false);
 
-   function handleClose() {
+   function handletoggle() {
       return setOpen(!open)
    }
 
@@ -58,7 +59,7 @@ export const Button = () => {
             <div />
             <div />
             <div />
-            {open ? <MobileMenu open={handleClose} /> : ''}
+            {open ? <MobileMenu open={handletoggle} /> : ''}
          </StyledBurger>
       </>
    )

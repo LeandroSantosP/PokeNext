@@ -1,11 +1,17 @@
+import { GetStaticProps } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { dataResultProps } from "..";
 import { FormatTextToUpperCase, getUrlId } from "../../shared/components/Card/Card";
+import { TitleCustom } from "../../shared/components/generics/TitleCustom";
+import { PokeHabilitys } from "../../shared/components/PokeAbilitys/PokeAbilitys";
+import { TableOfPokeInfos } from "../../shared/components/TableOfPokeInfos/TableOfPokeInfos";
 import { coloursByTypeProps, GetAllTyped } from "../../shared/functions/GetAllTypes";
 import { NormalizerData } from "../../shared/functions/NormalizantionData";
+import { pokeNewInfos } from "../types/PokemonIdTypes";
 import * as C from '../../styles/PokemonStyled';
+import Head from "next/head";
 
 export const getStaticPaths = async () => {
    const maxPokemons = 99999;
@@ -26,10 +32,13 @@ export const getStaticPaths = async () => {
    }
 }
 
-export const getStaticProps = async (context: any) => {
-
-   const id = context.params.pokemonId;
-
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+   <Head>
+      <title>Detalhes</title>
+      <meta name="description" content="Detalhes de um pokemon" />
+      <link rel="icon" type="image/x-icon" href="/images/logo.png" />
+   </Head>
+   const id = params?.pokemonId;
    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
    const data = await res.json();
 
@@ -38,11 +47,14 @@ export const getStaticProps = async (context: any) => {
          pokemon: data
       }
    }
-}
+};
 
 export default function Pokemon({ pokemon }: any) {
+
    const pokemons = NormalizerData(pokemon);
+
    const [poketype, setPokeType] = useState<coloursByTypeProps[]>([]);
+   const [newInfos, setNewInfos] = useState<pokeNewInfos>()
 
    const typesNames = pokemons?.pokeTypes.map(item => item.type.name);
 
@@ -52,6 +64,11 @@ export default function Pokemon({ pokemon }: any) {
             const response = await GetAllTyped(typesNames);
             if (response) {
                setPokeType(response.colors);
+               setNewInfos({
+                  colors: response.colors,
+                  abilitys: pokemon.abilities
+               })
+
             }
          }
 
@@ -68,47 +85,34 @@ export default function Pokemon({ pokemon }: any) {
                <C.PokeTitle>{FormatTextToUpperCase(pokemons?.pokename)}</C.PokeTitle>
                <Image
                   src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemons.pokeId}.png`}
-                  // src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${pokeID === 1 ? '00' + pokemons.pokeId : pokeID === 2 ? '0' + pokemons.pokeId : pokeID === 3 ? pokemons.pokeId : ''}.png`}
                   alt={pokemons.pokename}
                   width={200}
                   height={200}
                />
 
                <C.InfosContainer color="#111">
-
-                  <h2 >Tipo</h2>
+                  <TitleCustom color="#111" fontSize={11} text="Tipos" />
                   <C.typeContainer >
                      {pokemons && pokemons?.pokeTypes.map((item, index) => (
-
                         <Link key={index} href={`/pokemon/category/${getUrlId(item.type.url)}`} style={{
                            backgroundColor: `${poketype
                               .map(pokeInfo => pokeInfo.type === item.type.name && pokeInfo.color)
                               .filter(item => typeof item === 'string')[0]}`
                         }}>
-                           {FormatTextToUpperCase(item.type.name)}
+                           <>
+                              {FormatTextToUpperCase(item.type.name)}
+                           </>
                         </Link>
-
-
                      ))}
                   </C.typeContainer>
-
-                  <section>
-                     <div>
-                        <h4>Numero:</h4>
-                        <p>#{pokemons.pokeId}</p>
-                     </div>
-                     <div>
-                        <h4>Altura:</h4>
-                        <p>{pokemons.pokeHeight * 10}  <span>cm</span></p>
-                     </div>
-                     <div>
-                        <h4>Peso:</h4>
-                        <p>{pokemons.pokeWeight / 10} <span>Kg</span></p>
-                     </div>
-                  </section>
-
+                  <TitleCustom color="#111" fontSize={11} text="Abilidades" />
+                  <C.typeContainer>
+                     {newInfos && newInfos.abilitys.map((ability) => (
+                        <PokeHabilitys key={ability.slot} ability={ability} />
+                     ))}
+                  </C.typeContainer>
+                  <TableOfPokeInfos pokeInfos={pokemons} />
                </C.InfosContainer>
-
             </C.PokemonContainer>
 
          </>

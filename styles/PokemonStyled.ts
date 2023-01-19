@@ -3,14 +3,13 @@ import styled from "styled-components";
 export const PokemonContainer = styled.div`
    width: 100%;
    display: flex;
+   justify-content: center;
    flex-direction: column;
    align-items: center;
    padding: 15px;
    gap: 15px;
-   background-color: #918994;
-   /* background-image: url("https://coolbackgrounds.io/images/backgrounds/index/compute-ea4c57a4.png"); */
-   background-size: cover;
-   background-repeat: no-repeat;
+   background-color: #4B3F59;
+      min-height: 100vh;
    position: relative;
 
 
@@ -22,7 +21,6 @@ export const ShadowContainer = styled.div`
       position: absolute;
       left: 0;
       top: 0;
-
 
       background: rgb(255,255,255);
       background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(3,1,1,0.5270483193277311) 0%, rgba(0,0,0,1) 100%);
