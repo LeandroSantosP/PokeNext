@@ -74,7 +74,7 @@ export default function Pokemon({ pokemon }: any) {
 
          getColors();
       }
-   }, [setPokeType]);
+   }, [setPokeType, pokemon, typesNames]);
 
    const pokeID = (pokemons?.pokeId.toString().length);
 

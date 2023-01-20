@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import { Card } from '../shared/components/Card/Card';
-import { Button } from '../shared/components/Navbar/Button';
 import * as C from '../styles/HomeStyled';
 
 export interface resultsProps {
