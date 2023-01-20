@@ -3,11 +3,13 @@ import styled from "styled-components";
 export const AboutContainer = styled.section`
    display: flex;
    margin: 0 auto;
+   justify-content: center;
    background-color: #4B3F59;
    color: #ccc;
    flex-direction: column;
    padding: 20px;
-   height: 90vh;
+   height: 100vh;
+
 
    div:nth-child(1) {
       margin-bottom: 2rem;
@@ -31,6 +33,8 @@ export const AboutContainer = styled.section`
       display: flex;
       text-align: start;
       max-width: 600px;
+      font-size: 1.5rem;
+      text-align: center;
 
    }
    @media (max-width: 768px) {
